@@ -256,7 +256,7 @@ sqlplus -S / as sysdba \"@/home/oracle/scripts/archlog.sql\"\n\
 #define SHELLSCRIPT07 "\
 #!//usr/bin/expect\n\
 set timeout -1\n\
-spawn /home/oracle/scripts/addkey.sh\n\
+spawn /home/oracle/scripts/add-ddveorakeys.sh\n\
 expect \"Password: \"\n\
 send -- \"Password123!\r\"\n\
 expect eof\n\
@@ -375,8 +375,6 @@ void process_option_c()
    #endif
    printf("You have selected option C\n");
    #if __linux__
-   system("ssh-keygen -q -t rsa -N '' <<< $'\ny' >/dev/null 2>&1");
-   system("/home/oracle/scripts/add-ddveora.sh");
    system("ssh sysadmin@ddve-01 user add ddboost role admin password Password123!");
    system("ssh sysadmin@ddve-01 ddboost storage-unit create sql-storeunit user ddboost");
    #endif

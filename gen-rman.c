@@ -411,6 +411,7 @@ void process_option_d()
    system("clear");
    #endif
    #if __linux__
+   printf("--> yum -y install expect\n");
    system("yum -y install expect");
    #endif
    printf("You have selected option D - install expect as root\n");
@@ -445,6 +446,7 @@ void process_option_f()
    system("clear");
    #endif
    printf("You have selected option F - turn archivelog demodb\n");
+   printf("--> /home/oracle/scripts/archlog-demodb.sh demodb\n");
    system("/home/oracle/scripts/archlog-demodb.sh demodb");
    printf("Enter to return to main menu\n");
    getchar();
@@ -459,8 +461,10 @@ void process_option_g()
    #endif
    
    printf("You have selected option G - login as oracle and create demodb database\n");
-   system("/home/oracle/scripts/cr-demodb.sh");
-   system("/home/oracle/scripts/mod-tnsnames.sh");
+   printf("--> /home/oracle/scripts/cr-demodb.sh demodb\n");
+   system("/home/oracle/scripts/cr-demodb.sh demodb");
+   printf("--> /home/oracle/scripts/mod-tnsnames.sh demodb\n");
+   system("/home/oracle/scripts/mod-tnsnames.sh demodb");
    printf("Enter to return to main menu\n");
    getchar();
 }
@@ -474,6 +478,7 @@ void process_option_h()
    #endif
    
    printf("You have selected option H - login as oracle and destroy demodb database\n");
+   printf("--> /home/oracle/scripts/rm-demodb.sh demodb\n");
    system("/home/oracle/scripts/rm-demodb.sh demodb");
    printf("Enter to return to main menu\n");
    getchar();

@@ -314,6 +314,8 @@ export RMAN_AGENT_HOME=$ORACLE_HOME_DIR/opt/dpsapps/rmanagent\n\
 export ORACLE_HOME=/u01/app/oracle/12.1/db\n\
 service agentService start\n\
 service agentService status\n\
+rm -fr /u01/app/oracle/software/database/stage\n\
+rm -fr /u01/app/oracle/software/grid/stage\n\
 tail -f /opt/dpsapps/agentsvc/logs/OpAgentSvc-28Jun*.log\n\
 ll $RMAN_AGENT_HOME/config/rman_agent.config\n\
 ll $RMAN_AGENT_HOME/config/ddboost.config\n\
@@ -415,6 +417,10 @@ void process_option_d()
    #if __linux__
    printf("--> yum -y install expect\n");
    system("yum -y install expect");
+   printf("--> rm -fr /u01/app/oracle/software/database/stage\n");
+   system("rm -fr /u01/app/oracle/software/database/stage");
+   printf("--> rm -fr /u01/app/oracle/software/grid/stage\n");
+   system("rm -fr /u01/app/oracle/software/grid/stage");
    #endif
    printf("You have selected option D - install expect as root\n");
    printf("Enter to return to main menu\n");
@@ -464,7 +470,7 @@ void process_option_g()
    
    printf("You have selected option G - login as oracle and create demodb database\n");
    printf("- You can monitor the logs in /u01/app/oracle/cfgtoollogs/dbca/demodb/trace.log\n");
-   printf("- To check the DB activities -  /u01/app/oracle/diag/rdbms/demodb/demodb/trace/alert_demo.log\n\n");
+   printf("- To check the DB activities -  /u01/app/oracle/diag/rdbms/demodb/demodb/trace/alert_demodb.log\n\n");
    printf("--> /home/oracle/scripts/cr-demodb.sh demodb\n");
    system("/home/oracle/scripts/cr-demodb.sh demodb");
    printf("--> /home/oracle/scripts/mod-tnsnames.sh demodb\n");
@@ -541,11 +547,14 @@ void process_option_k()
    system("clear");
    #endif
    printf("You have selected option K - clean Oracle space\n");
+   
+   printf("--> rm -fr /u01/app/oracle/diag/rdbms/oradev1/oradev1/alert/log_*.xml\n");
    system("rm -fr /u01/app/oracle/diag/rdbms/oradev1/oradev1/alert/log_*.xml");
    system("rm -fr /u01/app/oracle/diag/rdbms/oradev1/oradev1/trace/*.tr?");
+   system("cat /dev/null > /u01/app/oracle/diag/rdbms/oradev1/oradev1/trace/alert_oradev1.log");
+   printf("--> rm -fr /u01/app/oracle/diag/rdbms/demodb/demodb/alert/log_*.xml\n");
    system("rm -fr /u01/app/oracle/diag/rdbms/demodb/demodb/alert/log_*.xml");
    system("rm -fr /u01/app/oracle/diag/rdbms/demodb/demodb/trace/*.tr?");
-   system("cat /dev/null > /u01/app/oracle/diag/rdbms/oradev1/oradev1/trace/alert_oradev1.log");
    system("cat /dev/null > /u01/app/oracle/diag/rdbms/demodb/demodb/trace/alert_demodb.log");
    printf("Enter to return to main menu\n");
    getchar();

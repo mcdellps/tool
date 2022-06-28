@@ -306,6 +306,8 @@ Login as oracle, run ssh sysadmin@ddve-01 adminaccess del ssh-keys 2\n\
 du -sh * | sort -rh | head -10\n\
 rm -fr /u01/app/oracle/diag/rdbms/oradev1/oradev1/alert/log_*.xml\n\
 rm -fr /u01/app/oracle/diag/rdbms/oradev1/oradev1/trace/*.tr?\n\
+show parameter max_dump_file_size\n\
+alter system set max_dump_file_size='200m';\n\
 Login as oracle, to create scripts\n\
 export ORACLE_HOME_DIR=/home/oracle\n\
 export RMAN_AGENT_HOME=$ORACLE_HOME_DIR/opt/dpsapps/rmanagent\n\
@@ -461,6 +463,8 @@ void process_option_g()
    #endif
    
    printf("You have selected option G - login as oracle and create demodb database\n");
+   printf("- You can monitor the logs in /u01/app/oracle/cfgtoollogs/dbca/demodb/trace.log\n");
+   printf("- To check the DB activities -  /u01/app/oracle/diag/rdbms/demodb/demodb/trace/alert_demo.log\n\n");
    printf("--> /home/oracle/scripts/cr-demodb.sh demodb\n");
    system("/home/oracle/scripts/cr-demodb.sh demodb");
    printf("--> /home/oracle/scripts/mod-tnsnames.sh demodb\n");
@@ -536,7 +540,13 @@ void process_option_k()
    #else 
    system("clear");
    #endif
-   printf("You have selected option K\n");
+   printf("You have selected option K - clean Oracle space\n");
+   system("rm -fr /u01/app/oracle/diag/rdbms/oradev1/oradev1/alert/log_*.xml");
+   system("rm -fr /u01/app/oracle/diag/rdbms/oradev1/oradev1/trace/*.tr?");
+   system("rm -fr /u01/app/oracle/diag/rdbms/demodb/demodb/alert/log_*.xml");
+   system("rm -fr /u01/app/oracle/diag/rdbms/demodb/demodb/trace/*.tr?");
+   system("cat /dev/null > /u01/app/oracle/diag/rdbms/oradev1/oradev1/trace/alert_oradev1.log");
+   system("cat /dev/null > /u01/app/oracle/diag/rdbms/demodb/demodb/trace/alert_demodb.log");
    printf("Enter to return to main menu\n");
    getchar();
 }
@@ -583,7 +593,7 @@ void list_menu_options()
    printf("g: Option G - create demodb database\n");
    printf("h: Option H - destroy demodb database\n");
    printf("j: Option J - customise Oracle RMAN scripts\n");
-   printf("k: Option K\n");
+   printf("k: Option K - clean Oracle space\n");
    printf("l: Option L\n");
    printf("m: Option M\n");   
    printf("z: Save and quit\n");

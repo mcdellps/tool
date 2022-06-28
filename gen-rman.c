@@ -425,8 +425,12 @@ void process_option_e()
    #else 
    system("clear");
    #endif
+   
+   printf("--> mtree list\n");
    system("ssh sysadmin@ddve-01 mtree list");
+   printf("\n--> ddboost storage-unit show\n");
    system("ssh sysadmin@ddve-01 ddboost storage-unit show");
+   printf("\n--> user show list\n");
    system("ssh sysadmin@ddve-01 user show list");
    printf("You have selected option E\n");
    printf("Enter to return to main menu\n");

@@ -303,6 +303,9 @@ Login as oracle, run ssh sysadmin@ddve-01 user show list\n\
 Login as oracle, run ssh sysadmin@ddve-01 ddboost storage-unit show\n\
 Login as oracle, run ssh sysadmin@ddve-01 adminaccess show ssh-keys\n\
 Login as oracle, run ssh sysadmin@ddve-01 adminaccess del ssh-keys 2\n\
+du -sh * | sort -rh | head -10\n\
+rm -fr /u01/app/oracle/diag/rdbms/oradev1/oradev1/alert/log_*.xml\n\
+rm -fr /u01/app/oracle/diag/rdbms/oradev1/oradev1/trace/*.tr?\n\
 Login as oracle, to create scripts\n\
 export ORACLE_HOME_DIR=/home/oracle\n\
 export RMAN_AGENT_HOME=$ORACLE_HOME_DIR/opt/dpsapps/rmanagent\n\
@@ -422,6 +425,9 @@ void process_option_e()
    #else 
    system("clear");
    #endif
+   system("ssh sysadmin@ddve-01 mtree list");
+   system("ssh sysadmin@ddve-01 ddboost storage-unit show");
+   system("ssh sysadmin@ddve-01 user show list");
    printf("You have selected option E\n");
    printf("Enter to return to main menu\n");
    getchar();
@@ -563,7 +569,7 @@ void list_menu_options()
    printf("b: Option B - create scripts\n");
    printf("c: Option C - setup ddboost\n");   
    printf("d: Option D - yum -y install expect [ root ]\n");
-   printf("e: Option E - \n");
+   printf("e: Option E - ssh sysadmin@ddve-01 \n");
    printf("f: Option F - turn archivelog demodb\n");
    printf("g: Option G - create demodb database\n");
    printf("h: Option H - destroy demodb database\n");

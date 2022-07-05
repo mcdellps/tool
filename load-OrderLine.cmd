@@ -1,0 +1,2 @@
+
+BULK INSERT order_line FROM 'Z:\TEMP\TPCHDATA\order_line_1.tbl' WITH (TABLOCK, DATAFILETYPE='char', CODEPAGE='raw', FIELDTERMINATOR = '|')

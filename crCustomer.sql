@@ -1,4 +1,4 @@
-USE [tpcc]
+USE [SQLPROD-01]
 GO
 
 /****** Object:  Table [dbo].[CUSTOMER]    Script Date: 05/18/2017 15:51:15 ******/
